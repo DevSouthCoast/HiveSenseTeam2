@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
+using HiveSense.Persistence;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Presentation;
 using Microsoft.SPOT.Presentation.Controls;
@@ -32,7 +33,10 @@ namespace HiveSense
                 timer.Tick +=<tab><tab>
                 timer.Start();
             *******************************************************************************************/
-
+            var sdlogger = new SDCardLogger(new RtcDateTimeProvider(), sdCard);
+            var consolelogger = new ConsoleLogger(new RtcDateTimeProvider());
+            var logger = new AggregateLogger(new ArrayList() {sdlogger, consolelogger});
+            logger.Log("Sensor", new Hashtable(){{"key","value"}});
 
             // Use Debug.Print to show messages in Visual Studio's "Output" window during debugging.
             Debug.Print("Program Started");

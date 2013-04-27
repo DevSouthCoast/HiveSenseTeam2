@@ -42,6 +42,14 @@
   <!-- Everything below here is custom to .NET MF / Gadgeteer template-->
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\HashtableExtensions.cs" />
+    <Compile Include="Persistence\AggregateLogger.cs" />
+    <Compile Include="Persistence\IDateTimeProvider.cs" />
+    <Compile Include="Persistence\ILogger.cs" />
+    <Compile Include="Persistence\SDCardLogger.cs" />
+    <Compile Include="Persistence\LogMessage.cs" />
+    <Compile Include="Persistence\RTCDateTimeProvider.cs" />
     <Compile Include="Program.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -54,6 +62,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\ConsoleLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
