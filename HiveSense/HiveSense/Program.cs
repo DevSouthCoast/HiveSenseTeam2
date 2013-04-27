@@ -17,6 +17,10 @@ namespace HiveSense
 {
     public partial class Program
     {
+        private Logger _logger;
+        private TemperatureHumiditySensor _temperatureHumiditySensor;
+        private LightSensor _lightSensor;
+
         // This method is run when the mainboard is powered up or reset.   
         void ProgramStarted()
         {
@@ -33,9 +37,21 @@ namespace HiveSense
                 timer.Start();
             *******************************************************************************************/
 
-
             // Use Debug.Print to show messages in Visual Studio's "Output" window during debugging.
+
             Debug.Print("Program Started");
+
+            // Setup a dummy logger
+            _logger = new Logger();
+            Debug.Print("Logger created.");
+
+            // Create the temperature and humidity sensor monitor.
+            _temperatureHumiditySensor = new TemperatureHumiditySensor(_logger, temperatureHumidity);
+            Debug.Print("Temperature and humidity monitoring started.");
+
+            // Create the light sensor monitor.
+            _lightSensor = new LightSensor(_logger, lightSensor, 15);
+            Debug.Print("Light sensor monitoring started.");
         }
     }
 }

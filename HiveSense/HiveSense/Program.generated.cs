@@ -16,19 +16,14 @@ namespace HiveSense
     public partial class Program : Gadgeteer.Program
     {
         // GTM.Module definitions
-        Gadgeteer.Modules.GHIElectronics.UsbClientDP usbClientDP;
-        Gadgeteer.Modules.Seeed.Accelerometer accelerometer;
-        Gadgeteer.Modules.GHIElectronics.Display_N18 display_N18;
-        Gadgeteer.Modules.Seeed.TemperatureHumidity temperatureHumidity;
-        Gadgeteer.Modules.GHIElectronics.Bluetooth bluetooth;
         Gadgeteer.Modules.GHIElectronics.LightSensor lightSensor;
-        Gadgeteer.Modules.GHIElectronics.SDCard sdCard;
-        Gadgeteer.Modules.Seeed.CellularRadio cellularRadio;
+        Gadgeteer.Modules.Seeed.TemperatureHumidity temperatureHumidity;
+        Gadgeteer.Modules.GHIElectronics.UsbClientDP usbClientDP;
 
         public static void Main()
         {
             //Important to initialize the Mainboard first
-            Mainboard = new GHIElectronics.Gadgeteer.FEZSpider();			
+            Mainboard = new GHIElectronics.Gadgeteer.FEZHydra();			
 
             Program program = new Program();
             program.InitializeModules();
@@ -39,21 +34,11 @@ namespace HiveSense
         private void InitializeModules()
         {   
             // Initialize GTM.Modules and event handlers here.		
-            usbClientDP = new GTM.GHIElectronics.UsbClientDP(1);
+            usbClientDP = new GTM.GHIElectronics.UsbClientDP(2);
 		
-            cellularRadio = new GTM.Seeed.CellularRadio(4);
+            temperatureHumidity = new GTM.Seeed.TemperatureHumidity(3);
 		
-            sdCard = new GTM.GHIElectronics.SDCard(5);
-		
-            display_N18 = new GTM.GHIElectronics.Display_N18(6);
-		
-            lightSensor = new GTM.GHIElectronics.LightSensor(9);
-		
-            accelerometer = new GTM.Seeed.Accelerometer(10);
-		
-            bluetooth = new GTM.GHIElectronics.Bluetooth(11);
-		
-            temperatureHumidity = new GTM.Seeed.TemperatureHumidity(14);
+            lightSensor = new GTM.GHIElectronics.LightSensor(13);
 
         }
     }
