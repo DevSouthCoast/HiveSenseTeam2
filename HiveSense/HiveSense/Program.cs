@@ -18,6 +18,10 @@ namespace HiveSense
 {
     public partial class Program
     {
+        private ILogger _logger;
+        private Sensors.TemperatureHumiditySensor _temperatureHumiditySensor;
+        private Sensors.LightSensor _lightSensor;
+
         // This method is run when the mainboard is powered up or reset.   
         void ProgramStarted()
         {
@@ -35,11 +39,11 @@ namespace HiveSense
             *******************************************************************************************/
             var sdlogger = new SDCardLogger(new RtcDateTimeProvider(), sdCard);
             var consolelogger = new ConsoleLogger(new RtcDateTimeProvider());
-            var logger = new AggregateLogger(new ArrayList() {sdlogger, consolelogger});
-            logger.Log("Sensor", new Hashtable(){{"key","value"}});
+            _logger = new AggregateLogger(new ArrayList() {sdlogger, consolelogger});
 
-            // Use Debug.Print to show messages in Visual Studio's "Output" window during debugging.
-            Debug.Print("Program Started");
+            _temperatureHumiditySensor = new Sensors.TemperatureHumiditySensor(_logger, temperatureHumidity);
+            _lightSensor = new Sensors.LightSensor(_logger, lightSensor, 15);
+
         }
     }
 }

@@ -28,5 +28,9 @@ namespace HiveSense.Persistence
         {
             Debug.Print(new LogMessage(dateTimeProvider.GetDateTime(), key, values).ToLogFileString());
         }
+
+        public void Dispose()
+        {
+        }
     }
 }

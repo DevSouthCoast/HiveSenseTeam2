@@ -1,5 +1,5 @@
 using System.Collections;
-
+/*
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Assembly |
@@ -7,7 +7,7 @@ namespace System.Runtime.CompilerServices
         AttributeTargets.Method)]
     public sealed class ExtensionAttribute : Attribute
     { }
-}
+}*/
 
 namespace HiveSense.Extensions
 {

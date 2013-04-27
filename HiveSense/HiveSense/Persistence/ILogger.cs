@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace HiveSense.Persistence
 {
-    public interface ILogger
+    public interface ILogger : IDisposable
     {
         void Log(string key, object value);
         void Log(string key, Hashtable values);

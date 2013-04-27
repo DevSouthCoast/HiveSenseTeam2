@@ -13,7 +13,8 @@ namespace HiveSense.Persistence
         private const string SingleValueKey = "Value";
         private SDCard card;
         private IDateTimeProvider dateTimeProvider;
-        
+        private bool noCard = true;
+
         // Dictionary<string, List<LogMessage>>
         private Hashtable memoryMessages = new Hashtable();
 
@@ -21,8 +22,11 @@ namespace HiveSense.Persistence
         {
             this.dateTimeProvider = dateTimeProvider;
             this.card = card;
-
-            this.card.MountSDCard();
+            
+            if (this.card.IsCardInserted)
+            {
+                this.card.MountSDCard();
+            }
             this.card.SDCardMounted += new SDCard.SDCardMountedEventHandler(SDCardMounted);
         }
 
@@ -34,7 +38,11 @@ namespace HiveSense.Persistence
 
         public void Log(string key, Hashtable values)
         {
-            if(card.IsCardMounted)
+            if (noCard && this.card.IsCardInserted)
+            {
+                this.card.MountSDCard();
+            }
+            if (this.card.IsCardInserted && card.IsCardMounted)
             {
                 LogToCard(this.dateTimeProvider.GetDateTime(), key, values);
             }
@@ -95,7 +103,13 @@ namespace HiveSense.Persistence
 
         private void SDCardMounted(SDCard sender, Gadgeteer.StorageDevice sdCard)
         {
+            noCard = false;
             FlushMemoryMessages();
+        }
+
+        public void Dispose()
+        {
+            this.card.UnmountSDCard();
         }
     }
 }

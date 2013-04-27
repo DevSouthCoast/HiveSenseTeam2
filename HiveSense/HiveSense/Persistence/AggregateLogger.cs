@@ -37,5 +37,19 @@ namespace HiveSense.Persistence
                 }
             }
         }
+
+        public void Dispose()
+        {
+            if (this.loggers != null)
+            {
+                foreach (ILogger logger in this.loggers)
+                {
+                    if (logger != null)
+                    {
+                        logger.Dispose();
+                    }
+                }
+            }
+        }
     }
 }
