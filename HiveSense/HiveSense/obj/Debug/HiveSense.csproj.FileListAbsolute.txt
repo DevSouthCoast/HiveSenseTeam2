@@ -232,3 +232,9 @@ C:\Users\Phil\Documents\GitHub\HiveSenseMaster\HiveSenseTeam2\HiveSense\HiveSens
 C:\Users\Phil\Documents\GitHub\HiveSenseMaster\HiveSenseTeam2\HiveSense\HiveSense\obj\Debug\le\HiveSense.pe
 C:\Users\Phil\Documents\GitHub\HiveSenseMaster\HiveSenseTeam2\HiveSense\HiveSense\obj\Debug\le\HiveSense.pdbx
 C:\Users\Phil\Documents\GitHub\HiveSenseMaster\HiveSenseTeam2\HiveSense\HiveSense\obj\Debug\HiveSense.pdb
+C:\Source\Cargowire\DevSouthCoast\HiveSense\HiveSense\HiveSense\obj\Debug\HiveSense.csprojResolveAssemblyReference.cache
+C:\Source\Cargowire\DevSouthCoast\HiveSense\HiveSense\HiveSense\obj\Debug\TinyCLR_DebugReferences.cache
+C:\Source\Cargowire\DevSouthCoast\HiveSense\HiveSense\HiveSense\obj\Debug\HiveSense.Resources.resources
+C:\Source\Cargowire\DevSouthCoast\HiveSense\HiveSense\HiveSense\obj\Debug\HiveSense.csproj.GenerateResource.Cache
+C:\Source\Cargowire\DevSouthCoast\HiveSense\HiveSense\HiveSense\obj\Debug\HiveSense.Resources.tinyresources
+C:\Source\Cargowire\DevSouthCoast\HiveSense\HiveSense\HiveSense\obj\Debug\TinyResGen.cache
