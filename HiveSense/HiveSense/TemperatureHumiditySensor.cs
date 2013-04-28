@@ -11,6 +11,8 @@ namespace HiveSense
     {
         private readonly Logger _logger;
         private readonly TemperatureHumidity _sensor;
+        private double _lastTemperature;
+        private double _lastRelativeHumidity;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemperatureHumiditySensor"/> class.
@@ -37,10 +39,22 @@ namespace HiveSense
         private void SensorOnMeasurementComplete(TemperatureHumidity sender, double temperature, double relativeHumidity)
         {
             // Log the readings.
+            _lastTemperature = temperature;
             _logger.Log("Temperature", temperature);
             Debug.Print("Temperature:" + temperature);
+            _lastRelativeHumidity = relativeHumidity;
             _logger.Log("Humidity", relativeHumidity);
             Debug.Print("Humidity:" + relativeHumidity);
+        }
+
+        public double LastTemperature()
+        {
+            return _lastTemperature;
+        }
+
+        public double LastRelativeHumidity()
+        {
+            return _lastRelativeHumidity;
         }
     }
 }

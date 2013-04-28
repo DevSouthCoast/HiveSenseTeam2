@@ -11,6 +11,7 @@ namespace HiveSense
     {
         private readonly Logger _logger;
         private readonly Gadgeteer.Modules.GHIElectronics.LightSensor _sensor;
+        private double _lastReading;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LightSensor"/> class.
@@ -45,6 +46,7 @@ namespace HiveSense
             {
                 // Read and log the sensor.
                 var lsp = _sensor.ReadLightSensorPercentage();
+                _lastReading = lsp;
                 _logger.Log("Light", lsp);
                 Debug.Print("Light:" + lsp.ToString());
             }
@@ -53,6 +55,11 @@ namespace HiveSense
                 // Re-start the timer again.
                 timer.Start();
             }
+        }
+
+        public double LastReading()
+        {
+            return _lastReading;
         }
     }
 }

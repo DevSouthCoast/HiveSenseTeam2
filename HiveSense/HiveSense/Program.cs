@@ -20,6 +20,9 @@ namespace HiveSense
         private Logger _logger;
         private TemperatureHumiditySensor _temperatureHumiditySensor;
         private LightSensor _lightSensor;
+        private BarometerSensor _barometerSensor;
+        private ButtonSensor _buttonSensor;
+        private BluetoothController _bluetoothController;
 
         // This method is run when the mainboard is powered up or reset.   
         void ProgramStarted()
@@ -52,6 +55,15 @@ namespace HiveSense
             // Create the light sensor monitor.
             _lightSensor = new LightSensor(_logger, lightSensor, 15);
             Debug.Print("Light sensor monitoring started.");
+
+            _barometerSensor = new BarometerSensor(_logger, barometer);
+            Debug.Print("Barometer sensor monitoring started.");         
+
+            _bluetoothController = new BluetoothController(bluetooth, _barometerSensor, _lightSensor, _temperatureHumiditySensor, "HiveSense9876", "9876");
+            Debug.Print("Bluetooth controller started.");
+
+            _buttonSensor = new ButtonSensor(button, _bluetoothController);
+            Debug.Print("Button monitoring started.");
         }
     }
 }

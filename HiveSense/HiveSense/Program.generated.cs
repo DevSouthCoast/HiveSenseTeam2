@@ -19,6 +19,9 @@ namespace HiveSense
         Gadgeteer.Modules.GHIElectronics.LightSensor lightSensor;
         Gadgeteer.Modules.Seeed.TemperatureHumidity temperatureHumidity;
         Gadgeteer.Modules.GHIElectronics.UsbClientDP usbClientDP;
+        Gadgeteer.Modules.Seeed.Barometer barometer;
+        Gadgeteer.Modules.GHIElectronics.Bluetooth bluetooth;
+        Gadgeteer.Modules.GHIElectronics.Button button;
 
         public static void Main()
         {
@@ -38,7 +41,13 @@ namespace HiveSense
 		
             temperatureHumidity = new GTM.Seeed.TemperatureHumidity(3);
 		
+            bluetooth = new GTM.GHIElectronics.Bluetooth(4);
+		
+            barometer = new GTM.Seeed.Barometer(5);
+		
             lightSensor = new GTM.GHIElectronics.LightSensor(13);
+		
+            button = new GTM.GHIElectronics.Button(14);
 
         }
     }
