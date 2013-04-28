@@ -25,11 +25,12 @@ namespace HiveSense.Persistence
             this.dateTimeProvider = dateTimeProvider;
             this.card = card;
             
+          //  this.card.SDCardMounted += new SDCard.SDCardMountedEventHandler(SDCardMounted);
             if (this.card.IsCardInserted)
             {
                 this.card.MountSDCard();
             }
-            this.card.SDCardMounted += new SDCard.SDCardMountedEventHandler(SDCardMounted);
+            UpdateLogIndexes();
         }
 
         public void Log(string key, object value)
@@ -125,7 +126,7 @@ namespace HiveSense.Persistence
             var index = 0;
             if (logFileNames.ContainsKey(key))
             {
-                return int.Parse(logFileNames[key].ToString());
+                index =  int.Parse(logFileNames[key].ToString());
             }
 
             StorageDevice device = card.GetStorageDevice();
@@ -134,7 +135,8 @@ namespace HiveSense.Persistence
             {
                 if (fileStream.Length > MaxFileSize)
                 {
-                    return ++index;
+                    logFileNames[key] = ++index;
+                   
                 }
             }
 
@@ -143,7 +145,7 @@ namespace HiveSense.Persistence
 
         private void UpdateLogIndexes()
         {
-            string[] files = card.GetStorageDevice().ListFiles("/");
+            string[] files = card.GetStorageDevice().ListFiles("");
             foreach (var file in files)
             {
                 if (file.IndexOf("log-") == 0)

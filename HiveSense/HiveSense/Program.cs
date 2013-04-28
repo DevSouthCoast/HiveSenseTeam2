@@ -49,6 +49,19 @@ namespace HiveSense
             _barometer = new BarometerSensor(_logger, barometer);
             _bluetoothController = new BluetoothController(_logger, bluetooth, _barometer, _lightSensor, _temperatureHumiditySensor, "HiveSense8765", "8765");
             _bluetoothController.StartPairing();
+// 
+            var smsManager = new SmsManager(cellularRadio, "YOUR PHONE NUMBER HERE");
+            var smsNotifier = new SmsNotifier(smsManager);
+            display_N18.Initialize(4000);
+            var displayNotifier = new N18DisplayNotifier(display_N18);
+            var debugNotifier = new DebugNotifier();
+            var aggregateNotifier = new AggregateNotifier(displayNotifier, debugNotifier);
+
+            //var impactDetector = new ImpactDetector(accelerometer, aggregateNotifier);
+            //impactDetector.Start();
+
+            var orientationDetector = new OrientationDetector(accelerometer, aggregateNotifier);
+            orientationDetector.Start();
         }
     }
 }
