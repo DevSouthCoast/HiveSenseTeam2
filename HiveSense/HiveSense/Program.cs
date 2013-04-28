@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
+using HiveSense.Controllers;
 using HiveSense.Persistence;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Presentation;
@@ -21,6 +22,8 @@ namespace HiveSense
         private ILogger _logger;
         private Sensors.TemperatureHumiditySensor _temperatureHumiditySensor;
         private Sensors.LightSensor _lightSensor;
+        private BarometerSensor _barometer;
+        private BluetoothController _bluetoothController;
 
         // This method is run when the mainboard is powered up or reset.   
         void ProgramStarted()
@@ -43,6 +46,9 @@ namespace HiveSense
 
             _temperatureHumiditySensor = new Sensors.TemperatureHumiditySensor(_logger, temperatureHumidity);
             _lightSensor = new Sensors.LightSensor(_logger, lightSensor, 15);
+            _barometer = new BarometerSensor(_logger, barometer);
+            _bluetoothController = new BluetoothController(_logger, bluetooth, _barometer, _lightSensor, _temperatureHumiditySensor, "HiveSense8765", "8765");
+            _bluetoothController.StartPairing();
         }
     }
 }
