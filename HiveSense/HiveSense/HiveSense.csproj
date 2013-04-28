@@ -39,17 +39,23 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE,MF_FRAMEWORK_VERSION_V4_2</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
   <!-- Everything below here is custom to .NET MF / Gadgeteer template-->
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\HashtableExtensions.cs" />
-    <Compile Include="Persistence\AggregateLogger.cs" />
-    <Compile Include="Persistence\IDateTimeProvider.cs" />
-    <Compile Include="Persistence\ILogger.cs" />
     <Compile Include="Persistence\SDCardLogger.cs" />
-    <Compile Include="Persistence\LogMessage.cs" />
-    <Compile Include="Persistence\RTCDateTimeProvider.cs" />
     <Compile Include="Program.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,7 +68,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\ConsoleLogger.cs" />
     <Compile Include="Sensors\LightSensor.cs" />
     <Compile Include="Sensors\TemperatureHumiditySensor.cs" />
   </ItemGroup>
@@ -119,5 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HiveSense.Core\HiveSense.Core.csproj">
+      <Project>{61207C14-1683-4A27-A558-990D57D71372}</Project>
+      <Name>HiveSense.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

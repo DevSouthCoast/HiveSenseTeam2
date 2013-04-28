@@ -1,9 +1,7 @@
 using System;
 using System.IO;
-using Gadgeteer;
 using HiveSense.Extensions;
 using Microsoft.SPOT;
-using Gadgeteer.Modules.GHIElectronics;
 using System.Collections;
 
 namespace HiveSense.Persistence
@@ -27,6 +25,23 @@ namespace HiveSense.Persistence
         public void Log(string key, Hashtable values)
         {
             Debug.Print(new LogMessage(dateTimeProvider.GetDateTime(), key, values).ToLogFileString());
+        }
+
+        public bool CanRead()
+        {
+            return false;
+        }
+
+        /* List<LogMessage> */
+        public LogMessage GetLastMessage(string key)
+        {
+            return null;
+        }
+
+        /* List<LogMessage> */
+        public ArrayList GetMessages(string key, int amount)
+        {
+            return null;
         }
 
         public void Dispose()

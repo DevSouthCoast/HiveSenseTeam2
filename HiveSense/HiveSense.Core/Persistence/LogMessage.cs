@@ -26,7 +26,7 @@ namespace HiveSense.Persistence
             msg.Append(this.Key);
             msg.Append("\",");
             msg.Append("\"time\":\"");
-            msg.Append(this.DateTime.ToUnixTicks());
+            msg.Append(this.DateTime.ToUnixMilliseconds());
             msg.Append("\",");
             msg.Append("\"values\":{");
             var numberOfValues = this.Values.Keys.Count;
@@ -46,6 +46,27 @@ namespace HiveSense.Persistence
             msg.Append("}");
 
             return msg.ToString();
+        }
+
+        public static LogMessage FromLogFileFormat(string logMsg)
+        {
+            //{"key":"TempHumid","time":"1306886422750","values":{"Temperature":"22.670000000000002","Humidity":"40.039999999999999"}}
+            var builder = new StringBuilder(logMsg);
+            builder.Replace("\"", string.Empty);
+            builder.Replace("{", string.Empty);
+            builder.Replace("}", string.Empty);
+
+            string[] values = builder.ToString().Split(new char[] { ':', ',' });
+
+            var log = new LogMessage(DateTime.UtcNow, null, null);
+            log.Key = values[1];
+            log.DateTime = DateTimeExtensions.FromUnixTicks(long.Parse(values[3]));
+            log.Values = new Hashtable();
+            for(var i = 5; i+1 < values.Length;i+=2)
+            {
+                log.Values.Add(values[i], values[i+1]);
+            }
+            return log;
         }
     }
 }

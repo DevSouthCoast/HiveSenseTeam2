@@ -51,5 +51,20 @@ namespace HiveSense.Persistence
                 }
             }
         }
+
+        public bool CanRead()
+        {
+            return false;
+        }
+
+        public LogMessage GetLastMessage(string key)
+        {
+            return null;
+        }
+
+        public ArrayList GetMessages(string key, int amount)
+        {
+            return null;
+        }
     }
 }

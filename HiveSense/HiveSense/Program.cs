@@ -43,7 +43,6 @@ namespace HiveSense
 
             _temperatureHumiditySensor = new Sensors.TemperatureHumiditySensor(_logger, temperatureHumidity);
             _lightSensor = new Sensors.LightSensor(_logger, lightSensor, 15);
-
         }
     }
 }

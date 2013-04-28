@@ -5,7 +5,7 @@ namespace HiveSense.Extensions
 {
     public static class DateTimeExtensions
     {
-        public static long ToUnixTicks(this DateTime dt)
+        public static long ToUnixMilliseconds(this DateTime dt)
         {
             DateTime epoch = new DateTime(1970, 1, 1);
             DateTime d2 = dt.ToUniversalTime();
@@ -13,10 +13,10 @@ namespace HiveSense.Extensions
             return ts.Ticks / TimeSpan.TicksPerMillisecond;
         }
 
-        public static DateTime FromUnixTicks(long unixTicks)
+        public static DateTime FromUnixTicks(long unixMilliseconds)
         {
             DateTime epoch = new DateTime(1970, 1, 1);
-            return epoch.AddTicks(unixTicks);
+            return epoch.AddMilliseconds(unixMilliseconds);
         }
     }
 }
